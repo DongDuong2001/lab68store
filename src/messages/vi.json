@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "Lab SixtyEight Store | Mã Nguồn & Boilerplate Chuẩn",
+    "description": "Cung cấp mã nguồn sẵn sàng triển khai, mẫu boilerplate và script tối ưu giúp lập trình viên tiết kiệm 50% thời gian phát triển dự án."
+  },
+  "nav": {
+    "home": "Trang Chủ",
+    "products": "Sản Phẩm"
+  },
+  "hero": {
+    "badge": "Giải Pháp Code Tinh Gọn",
+    "title": "Triển Khai Dự Án Nhanh Hơn với Code Chuẩn",
+    "subtitle": "Boilerplate & Script được tối ưu hóa cho dự án thực tế. Giúp bạn tập trung vào logic cốt lõi, rút ngắn thời gian setup cấu hình ban đầu.",
+    "cta": "Khám Phá Ngay",
+    "secondary": "Ghé thăm Ko-fi"
+  },
+  "products": {
+    "title": "Danh Mục Sản Phẩm",
+    "subtitle": "Mã nguồn và template được xây dựng chỉn chu, dễ dàng tùy chỉnh",
+    "viewDetails": "Chi Tiết",
+    "buyNow": "Mua Ngay",
+    "buyOnKofi": "Mua Qua Ko-fi",
+    "features": "Đặc Điểm Nổi Bật",
+    "techStack": "Công Nghệ Sử Dụng",
+    "liveDemo": "Xem Demo",
+    "price": "Chi Phí",
+    "empty": "Sản phẩm đang được cập nhật. Quay lại sớm nhé!",
+    "category": "Chủ Đề",
+    "allCategories": "Tất Cả"
+  },
+  "checkout": {
+    "title": "Xác Nhận Đơn Hàng",
+    "processing": "Đang kết nối...",
+    "pay": "Thanh Toán",
+    "success": "Giao Dịch Thành Công",
+    "successMessage": "Cảm ơn bạn! Mã nguồn đã sẵn sàng để tải xuống trong bảng điều khiển.",
+    "goToDashboard": "Truy Cập Kho Của Tôi",
+    "error": "Lỗi Thanh Toán",
+    "errorMessage": "Rất tiếc, giao dịch không thành công. Vui lòng kiểm tra lại phương thức thanh toán.",
+    "kofiTitle": "Hoàn Tất Qua Ko-fi",
+    "kofiMessage": "Sản phẩm được phân phối an toàn qua nền tảng Ko-fi. Vui lòng hoàn tất thanh toán để nhận file.",
+    "viewKofi": "Mở Trang Ko-fi",
+    "browseProducts": "Tiếp Tục Xem Hàng"
+  },
+  "dashboard": {
+    "title": "Kho Lưu Trữ",
+    "subtitle": "Quản lý sản phẩm và tài liệu hướng dẫn",
+    "kofiSubtitle": "Chào mừng bạn trở lại",
+    "kofiTitle": "Mua Hàng Qua Ko-fi",
+    "kofiMessage": "Hiện tại lab68dev hỗ trợ thanh toán và tải tài nguyên qua Ko-fi để đảm bảo tính bảo mật và tiện lợi nhất cho bạn.",
+    "viewKofi": "Ghé Cửa Hàng Ko-fi",
+    "orders": "Lịch Sử",
+    "downloads": "Tải Xuống",
+    "noOrders": "Bạn chưa sở hữu sản phẩm nào.",
+    "download": "Tải Về (.zip)",
+    "orderDate": "Ngày Mua",
+    "status": "Trạng Thái",
+    "total": "Tổng Chi Phí"
+  },
+  "footer": {
+    "tagline": "Lab SixtyEight - Công cụ tinh gọn cho lập trình viên thực chiến.",
+    "products": "Sản Phẩm",
+    "support": "Hỗ Trợ",
+    "legal": "Quy Định",
+    "privacy": "Bảo Mật",
+    "terms": "Điều Khoản",
+    "contact": "Liên Hệ",
+    "allRights": "Bản quyền thuộc về lab68dev."
+  },
+  "common": {
+    "loading": "Đang xử lý...",
+    "error": "Có lỗi xảy ra",
+    "retry": "Thử Lại",
+    "back": "Quay Lại",
+    "language": "Ngôn Ngữ"
+  }
+}

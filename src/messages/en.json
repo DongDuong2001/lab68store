@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "Lab SixtyEight Store",
+    "description": "Premium source code, boilerplate templates, and scripts for developers"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products"
+  },
+  "hero": {
+    "badge": "Premium Digital Products",
+    "title": "Source Code That Ships",
+    "subtitle": "Production-ready boilerplates, templates, and scripts built by senior engineers. Stop reinventing the wheel.",
+    "cta": "Browse Products",
+    "secondary": "View on Ko-fi"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Hand-crafted source code and templates",
+    "viewDetails": "View Details",
+    "buyNow": "Buy Now",
+    "buyOnKofi": "Buy on Ko-fi",
+    "features": "Features",
+    "techStack": "Tech Stack",
+    "liveDemo": "Live Demo",
+    "price": "Price",
+    "empty": "No products available yet. Check back soon.",
+    "category": "Category",
+    "allCategories": "All Categories"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "processing": "Processing...",
+    "pay": "Pay Now",
+    "success": "Payment Successful",
+    "successMessage": "Your purchase is complete. You can download your files from the dashboard.",
+    "goToDashboard": "Go to Dashboard",
+    "error": "Payment Failed",
+    "errorMessage": "Something went wrong with your payment. Please try again.",
+    "kofiTitle": "Complete Your Purchase on Ko-fi",
+    "kofiMessage": "Visit our Ko-fi shop to complete your purchase and download your products.",
+    "viewKofi": "Go to Ko-fi Shop",
+    "browseProducts": "Browse Products"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Your purchased products and downloads",
+    "kofiSubtitle": "Welcome to your dashboard",
+    "kofiTitle": "Purchase Products on Ko-fi",
+    "kofiMessage": "All our products are available for purchase on Ko-fi. Visit our Ko-fi shop to browse and buy source code, templates, and scripts.",
+    "viewKofi": "View Ko-fi Shop",
+    "orders": "Orders",
+    "downloads": "Downloads",
+    "noOrders": "You have no orders yet.",
+    "download": "Download",
+    "orderDate": "Order Date",
+    "status": "Status",
+    "total": "Total"
+  },
+  "footer": {
+    "tagline": "Premium source code for developers who ship.",
+    "products": "Products",
+    "support": "Support",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "allRights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try Again",
+    "back": "Back",
+    "language": "Language"
+  }
+}
