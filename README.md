@@ -15,6 +15,7 @@ A premium digital product showcase for source code, boilerplate templates, and s
 ## Design System
 
 **Visual Identity:**
+
 - **Font:** Archivo
 - **Colors:** Strict black (#000000) and white (#FFFFFF) palette
 - **Style:** Neo-Brutalism with hard shadows, thick borders, flat colors
@@ -22,18 +23,21 @@ A premium digital product showcase for source code, boilerplate templates, and s
 ## Features
 
 ### Product Showcase
+
 - Gallery-style product display with large imagery
 - Category filtering
 - Bilingual product information (EN/VI)
 - Ko-fi integration for purchases
 
 ### Design
+
 - Large product cards with 4:3 aspect ratio imagery
 - Heavy use of whitespace for premium feel
 - Neo-Brutalism aesthetic with thick borders and hard shadows
 - Custom favicon with "68" branding
 
 ### Internationalization
+
 - Full English and Vietnamese support
 - Locale-specific product names and descriptions
 - Automatic language switching
