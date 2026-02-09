@@ -1,6 +1,6 @@
 # Lab SixtyEight Store
 
-A premium digital marketplace for source code, boilerplate templates, and scripts. Built with modern web technologies and a strict black-and-white design aesthetic.
+A premium digital product showcase for source code, boilerplate templates, and scripts. Built with modern web technologies and a strict black-and-white design aesthetic.
 
 ## Architecture
 
@@ -11,8 +11,8 @@ A premium digital marketplace for source code, boilerplate templates, and script
 - **Styling:** Tailwind CSS 4
 - **Database:** Neon PostgreSQL
 - **ORM:** Prisma
-- **Authentication:** Clerk
-- **Payments:** Ko-fi (external)
+- **Authentication:** Simple password-based admin auth
+- **Payments:** Ko-fi (external platform)
 - **Localization:** next-intl (English, Vietnamese)
 
 ### Design System
@@ -26,91 +26,62 @@ A premium digital marketplace for source code, boilerplate templates, and script
 ### Data Model
 
 ```prisma
-model User {
-  id         String     @id @default(cuid())
-  clerkId    String     @unique
-  email      String     @unique
-  name       String?
-  imageUrl   String?
-  purchases  Purchase[]
-}
-
 model Product {
   id            String        @id @default(cuid())
   slug          String        @unique
-  status        ProductStatus
+  status        ProductStatus @default(DRAFT)
   nameEn        String
   nameVi        String
   descriptionEn String
   descriptionVi String
+  featuresEn    String[]
+  featuresVi    String[]
   price         Int
+  currency      String        @default("USD")
+  imageUrl      String?
+  galleryUrls   String[]
+  techStack     String[]
+  demoUrl       String?
   fileUrl       String
+  fileSize      String?
+  categoryId    String?
   category      Category?
-  purchases     Purchase[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
-model Purchase {
-  id                String   @id @default(cuid())
-  userId            String
-  productId         String
-  price             Int
-  kofiTransactionId String?
-  createdAt         DateTime @default(now())
+model Category {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  nameEn    String
+  nameVi    String
+  products  Product[]
 }
 ```
 
-## Authentication Integration
+## Admin Panel
 
-### Clerk Setup
+### Authentication
 
-1. **Environment Variables:**
-   ```env
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-   CLERK_SECRET_KEY=sk_test_...
-   CLERK_WEBHOOK_SECRET=whsec_...
-   ```
+Simple password-based authentication for managing products:
 
-2. **Webhook Configuration:**
-   - Endpoint: `https://your-domain.com/api/webhooks/clerk`
-   - Events: `user.created`, `user.updated`, `user.deleted`
-   - The webhook automatically syncs Clerk users to PostgreSQL database
+**Location:** `/admin/login`
+**Dashboard:** `/admin/dashboard`
 
-3. **User Flow:**
-   - User signs in via Google/GitHub through Clerk
-   - Webhook fires on first login → creates User record with `clerkId`
-   - User can view purchases in `/library` route
-   - All routes under `/library` are protected (requires authentication)
+Features:
+- Session-based cookie authentication
+- Product CRUD operations
+- Image upload management
+- Category management
+- Status control (Draft/Published/Archived)
 
-### Webhook Handler
+### Admin Routes
 
-Located at `src/app/api/webhooks/clerk/route.ts`:
-
-```typescript
-// Automatically creates/updates users in PostgreSQL when they sign in
-POST /api/webhooks/clerk
 ```
-
-**Logic:**
-- `user.created`: Creates new User record with clerkId
-- `user.updated`: Upserts User data (email, name, imageUrl)
-- `user.deleted`: Removes User from database
-
-## Purchase Tracking
-
-### My Library Page
-
-Protected route at `/library` that displays all purchases for authenticated users.
-
-**Features:**
-- Lists all purchased products with download links
-- Shows purchase date and price
-- Direct download access to ZIP files
-- Empty state with Ko-fi shop link
-
-**Access Control:**
-```typescript
-const { userId } = await auth();
-if (!userId) redirect("/sign-in");
+/admin/login              # Admin login page
+/admin/dashboard          # Product list & stats
+/admin/dashboard/add      # Create new product
+/admin/dashboard/edit/[id] # Edit existing product
 ```
 
 ## Development
@@ -122,16 +93,15 @@ if (!userId) redirect("/sign-in");
 npm install
 
 # Setup environment variables
-cp .env.example .env.local
-# Fill in your Neon DB, Clerk, and Ko-fi credentials
+# Edit .env.local with your credentials
 
 # Push schema to database
-npx prisma db push
+npm run db:push
 
 # Generate Prisma client
 npx prisma generate
 
-# Seed sample data
+# Seed sample data (optional)
 npm run db:seed
 
 # Start development server
@@ -144,20 +114,20 @@ npm run dev
 # Push schema changes
 npm run db:push
 
-# Generate Prisma client
-npx prisma generate
-
 # Open Prisma Studio
-npx prisma studio
+npm run db:studio
 
 # Seed database
 npm run db:seed
+
+# Clear database
+npm run db:clear
 ```
 
 ### Build & Deploy
 
 ```bash
-# Build for production
+# Test production build
 npm run build
 
 # Start production server
@@ -170,38 +140,40 @@ npm start
 src/
 ├── app/
 │   ├── [locale]/           # Internationalized routes
-│   │   ├── library/        # Protected: user purchases
 │   │   ├── products/       # Public: product listing
-│   │   ├── sign-in/        # Clerk sign-in
-│   │   └── sign-up/        # Clerk sign-up
+│   │   ├── privacy/        # Privacy policy
+│   │   └── terms/          # Terms of service
+│   ├── admin/              # Admin panel
+│   │   ├── login/          # Admin authentication
+│   │   └── dashboard/      # Product management
 │   └── api/
-│       └── webhooks/
-│           └── clerk/      # User sync webhook
+│       ├── admin/          # Admin API endpoints
+│       ├── checkout/       # Ko-fi redirect
+│       └── products/       # Public product API
 ├── components/
 │   ├── ui/                 # Base UI components
+│   ├── admin/              # Admin components
 │   ├── header.tsx          # Main navigation
 │   ├── footer.tsx          # Site footer
 │   └── product-card.tsx    # Gallery-style product cards
 ├── lib/
 │   ├── db.ts               # Prisma client
+│   ├── admin-auth.ts       # Admin authentication
 │   └── utils.ts            # Utility functions
 ├── messages/
 │   ├── en.json             # English translations
 │   └── vi.json             # Vietnamese translations
-└── middleware.ts           # Clerk + i18n middleware
+└── middleware.ts           # Internationalization middleware
 ```
 
 ## Key Features
 
-### Automatic Profile Sync
-- Users authenticate via Clerk (Google/GitHub)
-- Webhook automatically creates User record on first login
-- Profile data synced to PostgreSQL for purchase tracking
-
-### Purchase Management
-- Users can view all purchases in `/library`
-- Direct download links to ZIP files stored on Ko-fi
-- Purchase history preserved in database
+### Product Showcase
+- Gallery-style product display with large imagery
+- Category filtering
+- Bilingual product information (EN/VI)
+- Ko-fi integration for purchases
+- Direct purchase links to Ko-fi store
 
 ### Gallery Design
 - Large product cards with 4:3 aspect ratio imagery
@@ -213,6 +185,12 @@ src/
 - Full English and Vietnamese support
 - Locale-specific product names and descriptions
 - Automatic language detection and switching
+- URL-based locale routing (`/en/products`, `/vi/products`)
+
+### Favicon & Branding
+- Custom dynamic favicon generated with "68" branding
+- Static favicon.ico support
+- Apple touch icon for mobile devices
 
 ## Environment Variables
 
@@ -222,32 +200,57 @@ Required variables in `.env.local`:
 # Database
 DATABASE_URL="postgresql://..."
 
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
-CLERK_SECRET_KEY="sk_test_..."
-CLERK_WEBHOOK_SECRET="whsec_..."
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-
 # Application
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 # Ko-fi
-NEXT_PUBLIC_KOFI_URL="https://ko-fi.com/..."
+NEXT_PUBLIC_KOFI_URL="https://ko-fi.com/your-username"
 ```
 
 ## Routes
 
-- `/` - Homepage with gallery layout
+### Public Routes
+- `/` - Homepage with featured products
 - `/products` - Product listing with category filter
 - `/products/[slug]` - Product detail page
-- `/library` - User's purchased products (protected)
-- `/sign-in` - Clerk authentication
-- `/sign-up` - Clerk registration
-- `/api/webhooks/clerk` - User sync webhook
+- `/privacy` - Privacy policy
+- `/terms` - Terms of service
+
+### Admin Routes (Protected)
+- `/admin/login` - Admin authentication
+- `/admin/dashboard` - Product management
+- `/admin/dashboard/add` - Create product
+- `/admin/dashboard/edit/[id]` - Edit product
+
+### API Routes
+- `GET /api/products` - List all published products
+- `POST /api/checkout` - Redirect to Ko-fi
+- `POST /api/admin/login` - Admin login
+- `POST /api/admin/products` - Create product
+- `PUT /api/admin/products/[id]` - Update product
+- `DELETE /api/admin/products/[id]` - Delete product
+- `POST /api/admin/upload` - Upload images
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables:
+   - `DATABASE_URL`
+   - `NEXT_PUBLIC_APP_URL`
+   - `NEXT_PUBLIC_KOFI_URL`
+4. Deploy
+
+The build automatically runs `prisma generate` via the `postinstall` script.
+
+### Database Setup
+
+This project uses Neon PostgreSQL. Get your connection string from:
+- https://console.neon.tech/
 
 ## License
 
 All rights reserved. Lab SixtyEight.
+
