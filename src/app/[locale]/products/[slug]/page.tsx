@@ -13,10 +13,26 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const products = await db.product.findMany({
+    where: { status: "PUBLISHED" },
+    select: { slug: true },
+  });
+
+  // Generate params for both locales
+  const params = products.flatMap((product) => [
+    { locale: "en", slug: product.slug },
+    { locale: "vi", slug: product.slug },
+  ]);
+
+  return params;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   const product = await db.product.findFirst({ 
-    where: { slug, status: "PUBLISHED" } 
+    where: { slug: decodedSlug, status: "PUBLISHED" } 
   });
 
   if (!product) return {};
@@ -38,10 +54,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { locale, slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   const t = await getTranslations({ locale, namespace: "products" });
 
   const product = await db.product.findFirst({
-    where: { slug, status: "PUBLISHED" },
+    where: { slug: decodedSlug, status: "PUBLISHED" },
     include: { category: true },
   });
 
