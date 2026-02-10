@@ -44,6 +44,25 @@ export function ProductForm({
     categoryId: product?.categoryId || "",
   });
 
+  // Function to sanitize slug (remove periods and special chars)
+  const sanitizeSlug = (text: string) => {
+    return text
+      .toLowerCase()
+      .replace(/\./g, "-") // Replace periods with hyphens
+      .replace(/[^a-z0-9-]/g, "-") // Replace other special chars with hyphens
+      .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+      .replace(/^-|-$/g, ""); // Remove leading/trailing hyphens
+  };
+
+  // Auto-generate slug from product name
+  const handleNameChange = (value: string) => {
+    setFormData({ ...formData, nameEn: value });
+    // Only auto-generate slug if it's a new product and slug is empty
+    if (!product && !formData.slug) {
+      setFormData({ ...formData, nameEn: value, slug: sanitizeSlug(value) });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -133,9 +152,7 @@ export function ProductForm({
                     <input
                       type="text"
                       value={formData.nameEn}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nameEn: e.target.value })
-                      }
+                      onChange={(e) => handleNameChange(e.target.value)}
                       className="neo-input w-full"
                       required
                     />
@@ -164,14 +181,14 @@ export function ProductForm({
                     type="text"
                     value={formData.slug}
                     onChange={(e) =>
-                      setFormData({ ...formData, slug: e.target.value })
+                      setFormData({ ...formData, slug: sanitizeSlug(e.target.value) })
                     }
                     className="neo-input w-full"
-                    placeholder="nextjs-saas-starter"
+                    placeholder="nextjs-saas-starter (no periods allowed)"
                     required
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    URL-friendly identifier
+                    URL-friendly identifier (periods will be converted to hyphens)
                   </p>
                 </div>
 
