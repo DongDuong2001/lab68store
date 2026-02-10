@@ -26,8 +26,8 @@ export async function ProductGrid({
 
   if (products.length === 0) {
     return (
-      <div className="neo-border bg-gray-50 p-16 text-center">
-        <p className="text-gray-500 font-bold uppercase tracking-wide text-sm">
+      <div className="bg-gray-50 border border-gray-200 p-16 text-center rounded-lg">
+        <p className="text-gray-500 font-semibold uppercase tracking-wide text-sm">
           No products available yet. Check back soon.
         </p>
       </div>
