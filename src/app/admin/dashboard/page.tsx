@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { Container, Button, Card, CardContent } from "@/components/ui";
-import { Edit, Trash2, ExternalLink, Plus } from "lucide-react";
+import { Edit, Trash2, ExternalLink, Plus, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { DeleteProductButton } from "@/components/admin/delete-product-button";
 
@@ -20,6 +20,14 @@ export default async function AdminDashboardPage() {
     orderBy: { nameEn: "asc" },
   });
 
+  const contacts = await db.customServiceRequest.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const pendingContacts = contacts.filter((c) => c.status === "pending").length;
+
   return (
     <Container>
       <div className="mb-8 flex items-center justify-between">
@@ -36,7 +44,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Card>
           <CardContent className="p-6">
             <div className="text-3xl font-black mb-1">{products.length}</div>
@@ -63,6 +71,24 @@ export default async function AdminDashboardPage() {
             </div>
           </CardContent>
         </Card>
+        <Link href="/admin/dashboard/contacts">
+          <Card className="hover:border-black transition-colors cursor-pointer">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-3xl font-black">{contacts.length}</div>
+                <MessageSquare size={24} className="text-gray-400" />
+              </div>
+              <div className="text-sm text-gray-600 uppercase font-bold mb-1">
+                Service Requests
+              </div>
+              {pendingContacts > 0 && (
+                <div className="text-xs text-orange-600 font-bold">
+                  {pendingContacts} pending
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </Link>
       </div>
 
       {/* Products Table */}
