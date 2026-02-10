@@ -13,7 +13,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b-3 border-black">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <Container className="flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
@@ -23,7 +23,7 @@ export function Header() {
               alt="Lab SixtyEight"
               width={40}
               height={40}
-              className="object-contain border-3 border-black rounded-lg"
+              className="object-contain border-2 border-black rounded-lg"
               priority
             />
           </div>
@@ -64,7 +64,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t-3 border-black bg-white">
+        <div className="md:hidden border-t border-gray-200 bg-white">
           <Container className="py-6 flex flex-col gap-4">
             <Link
               href="/"
@@ -80,7 +80,7 @@ export function Header() {
             >
               {t("products")}
             </Link>
-            <div className="pt-4 border-t-3 border-black">
+            <div className="pt-4 border-t border-gray-200">
               <LanguageSwitcher />
             </div>
           </Container>
