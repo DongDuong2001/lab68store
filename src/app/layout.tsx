@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-archivo",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
   display: "swap",
 });
 
@@ -27,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={archivo.variable}>
-      <body className="font-archivo antialiased min-h-screen flex flex-col">
+    <html lang="en" className={ibmPlexSans.variable}>
+      <body className="font-ibm-plex-sans antialiased min-h-screen flex flex-col">
         {children}
       </body>
     </html>
