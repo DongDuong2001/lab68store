@@ -29,7 +29,7 @@ export function CategoryFilter({
       <Link
         href="/products"
         className={cn(
-          "px-4 py-2 text-xs font-bold uppercase tracking-wider border-3 border-black transition-all",
+          "px-4 py-2 text-xs font-bold uppercase tracking-wider border-2 border-black transition-all",
           !activeCategory
             ? "bg-black text-white"
             : "bg-white text-black hover:bg-gray-50"
@@ -42,7 +42,7 @@ export function CategoryFilter({
           key={cat.id}
           href={`/products?category=${cat.slug}`}
           className={cn(
-            "px-4 py-2 text-xs font-bold uppercase tracking-wider border-3 border-black transition-all",
+            "px-4 py-2 text-xs font-bold uppercase tracking-wider border-2 border-black transition-all",
             activeCategory === cat.slug
               ? "bg-black text-white"
               : "bg-white text-black hover:bg-gray-50"
