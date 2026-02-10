@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Container, Button } from "@/components/ui";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Code2, Palette, Rocket } from "lucide-react";
 import { db } from "@/lib/db";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
@@ -161,6 +161,80 @@ export default async function HomePage({ params }: Props) {
                 <ArrowRight className="ml-2 inline-block" size={18} />
               </Button>
             </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* Custom Services Section */}
+      <section className="bg-gradient-to-b from-gray-50 to-white py-16 md:py-20">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="heading-caps text-3xl md:text-4xl mb-4">
+                {locale === "vi" ? "Cần dịch vụ tùy chỉnh?" : "Need Custom Services?"}
+              </h2>
+              <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                {locale === "vi" 
+                  ? "Tôi cung cấp dịch vụ phát triển tùy chỉnh cho script, template và landing page theo nhu cầu riêng của bạn."
+                  : "I provide custom development services for scripts, templates, and landing pages tailored to your specific needs."}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              {/* Script Development */}
+              <div className="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 transition-colors">
+                <div className="w-12 h-12 mx-auto mb-4 bg-black text-white flex items-center justify-center">
+                  <Code2 size={24} />
+                </div>
+                <h3 className="font-bold text-lg mb-2 uppercase">
+                  {locale === "vi" ? "Custom Scripts" : "Custom Scripts"}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {locale === "vi" 
+                    ? "Automation, tools, và scripts chuyên biệt"
+                    : "Automation, tools, and specialized scripts"}
+                </p>
+              </div>
+
+              {/* Template Development */}
+              <div className="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 transition-colors">
+                <div className="w-12 h-12 mx-auto mb-4 bg-black text-white flex items-center justify-center">
+                  <Palette size={24} />
+                </div>
+                <h3 className="font-bold text-lg mb-2 uppercase">
+                  {locale === "vi" ? "Templates & Themes" : "Templates & Themes"}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {locale === "vi" 
+                    ? "Website templates và UI themes"
+                    : "Website templates and UI themes"}
+                </p>
+              </div>
+
+              {/* Landing Pages */}
+              <div className="bg-white border border-gray-200 p-6 text-center hover:border-gray-400 transition-colors">
+                <div className="w-12 h-12 mx-auto mb-4 bg-black text-white flex items-center justify-center">
+                  <Rocket size={24} />
+                </div>
+                <h3 className="font-bold text-lg mb-2 uppercase">
+                  {locale === "vi" ? "Landing Pages" : "Landing Pages"}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {locale === "vi" 
+                    ? "High-converting landing pages"
+                    : "High-converting landing pages"}
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link href="/custom-services">
+                <Button variant="primary" size="lg">
+                  {locale === "vi" ? "Yêu cầu dịch vụ" : "Request Custom Service"}
+                  <ArrowRight className="ml-2 inline-block" size={18} />
+                </Button>
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
