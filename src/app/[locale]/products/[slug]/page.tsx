@@ -15,7 +15,9 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const product = await db.product.findUnique({ where: { slug } });
+  const product = await db.product.findFirst({ 
+    where: { slug, status: "PUBLISHED" } 
+  });
 
   if (!product) return {};
 
@@ -38,7 +40,7 @@ export default async function ProductDetailPage({ params }: Props) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "products" });
 
-  const product = await db.product.findUnique({
+  const product = await db.product.findFirst({
     where: { slug, status: "PUBLISHED" },
     include: { category: true },
   });
