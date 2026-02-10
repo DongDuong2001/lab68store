@@ -29,7 +29,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
   });
 
   return (
-    <section className="border-b-3 border-black">
+    <section className="py-16">
       <Container className="py-16">
         {/* Header */}
         <div className="mb-12">
