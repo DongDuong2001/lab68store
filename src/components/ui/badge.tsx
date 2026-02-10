@@ -13,7 +13,7 @@ export function Badge({
 }: BadgeProps) {
   const variants = {
     default: "bg-black text-white",
-    outline: "bg-white text-black border-3 border-black",
+    outline: "bg-white text-black border border-gray-300",
   };
 
   return (
