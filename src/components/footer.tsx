@@ -41,7 +41,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={process.env.NEXT_PUBLIC_KOFI_URL || "https://ko-fi.com/lab68"}
+                  href={process.env.NEXT_PUBLIC_KOFI_URL || "https://ko-fi.com/dongphuduong"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-400 hover:text-white transition-colors"
@@ -84,7 +84,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/lab68"
+              href="https://github.com/lab68dev"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-white transition-colors"
