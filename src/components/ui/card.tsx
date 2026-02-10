@@ -58,7 +58,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     return (
       <div
         ref={ref}
-        className={cn("mt-4 pt-4 border-t-3 border-black", className)}
+        className={cn("mt-4 pt-4 border-t-2 border-gray-200", className)}
         {...props}
       >
         {children}
