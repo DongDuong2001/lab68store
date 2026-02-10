@@ -58,7 +58,7 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <section>
       {/* Breadcrumb */}
-      <div className="border-b-3 border-black">
+      <div className="border-b border-gray-200">
         <Container className="py-4">
           <Link
             href="/products"
@@ -75,7 +75,7 @@ export default async function ProductDetailPage({ params }: Props) {
           {/* Left Column - Image & Details */}
           <div className="lg:col-span-3">
             {product.imageUrl && (
-              <div className="relative w-full aspect-video border-3 border-black neo-shadow mb-8 overflow-hidden bg-gray-100">
+              <div className="relative w-full aspect-video border-2 border-black shadow-lg mb-8 overflow-hidden bg-gray-100">
                 <Image
                   src={product.imageUrl}
                   alt={name}
@@ -105,7 +105,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   {features.map((feature, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 p-4 border-3 border-black"
+                      className="flex items-start gap-3 p-4 border border-gray-200"
                     >
                       <Check
                         size={18}
@@ -127,7 +127,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   {product.galleryUrls.map((url, i) => (
                     <div
                       key={i}
-                      className="relative aspect-video border-3 border-black overflow-hidden bg-gray-100"
+                      className="relative aspect-video border border-gray-300 overflow-hidden bg-gray-100"
                     >
                       <Image
                         src={url}
@@ -146,7 +146,7 @@ export default async function ProductDetailPage({ params }: Props) {
           {/* Right Column - Purchase Card */}
           <div className="lg:col-span-2">
             <div className="sticky top-24">
-              <div className="neo-border neo-shadow-lg p-8 bg-white">
+              <div className="border-2 border-black shadow-lg p-8 bg-white">
                 {/* Category */}
                 {categoryName && (
                   <Badge variant="outline" className="mb-4">
@@ -190,7 +190,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 )}
 
                 {/* Divider */}
-                <div className="border-t-3 border-black mt-6 pt-6">
+                <div className="border-t border-gray-200 mt-6 pt-6">
                   {/* Tech Stack */}
                   <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">
                     {t("techStack")}
@@ -199,7 +199,7 @@ export default async function ProductDetailPage({ params }: Props) {
                     {product.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs font-bold uppercase bg-gray-100 px-3 py-1.5 border-2 border-black"
+                        className="text-xs font-bold uppercase bg-gray-100 px-3 py-1.5 border border-gray-300"
                       >
                         {tech}
                       </span>
