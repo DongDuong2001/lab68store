@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,6 +19,19 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Save to database
+    await db.customServiceRequest.create({
+      data: {
+        name,
+        email,
+        serviceType,
+        budget: budget || null,
+        timeline: timeline || null,
+        message,
+        status: "pending",
+      },
+    });
 
     // Email body
     const emailBody = `
